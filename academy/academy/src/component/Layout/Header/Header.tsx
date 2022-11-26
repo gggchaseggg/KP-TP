@@ -5,6 +5,8 @@ import CityIcon from "../../SvgIcons/CityIcon";
 import SignIcon from "../../SvgIcons/SignIcon";
 import clsx from "clsx";
 import ProfileIcon from "../../SvgIcons/ProfileIcon";
+import { Link } from "react-router-dom";
+import PATHS from "../../../data/paths";
 
 const Header = () => {
   return (
@@ -12,19 +14,24 @@ const Header = () => {
       <nav className={style.navigation}>
         <ul className={style.navList}>
           <li className={style.navItem}>
-            <img src="/img/Layout/logo.png" alt="лого" />
+            <Link to={PATHS.MAIN}>
+              <img src="/img/Layout/logo.png" alt="лого" />
+            </Link>
           </li>
           <li className={style.navItem}>
-            <MenuIcon className={style.icon} />
-            <span>Все специальности</span>
+            <Link to={PATHS.PROGRAMS}>
+              <MenuIcon className={style.icon} />
+              <span>Все специальности</span>
+            </Link>
           </li>
-          <li className={style.navItem}>Мероприятия</li>
-          <li className={style.navItem}>Новости</li>
-          <li className={style.navItem}>Карьера</li>
           <li className={style.navItem}>
-            <CityIcon className={style.icon} />
-            <span className={style.city}>Нижний новгород</span>
-            <SignIcon className={clsx(style.icon, style.signIcon)} />
+            <Link to={PATHS.EVENTS}>Мероприятия</Link>
+          </li>
+          <li className={style.navItem}>
+            <Link to={PATHS.NEWS}>Новости</Link>
+          </li>
+          <li className={style.navItem}>
+            <Link to={PATHS.CAREER}>Карьера</Link>
           </li>
           <li className={style.navItem}>
             <a href="tel:89190127950" className={style.tel}>
