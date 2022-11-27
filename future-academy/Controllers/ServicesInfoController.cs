@@ -1,5 +1,7 @@
-﻿using future_academy.Models;
+﻿using future_academy.Contexts;
+using future_academy.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace future_academy.Controllers
 {
@@ -8,11 +10,19 @@ namespace future_academy.Controllers
     public class ServicesInfoController : ControllerBase
     {
 
+        private ServicesInfoContext db = new ServicesInfoContext();
+
+        //private readonly ServicesInfoContext _context;
+
+        //public ServicesInfoController(ServicesInfoContext context)
+        //{
+        //    _context = context;
+        //}
+
         [HttpGet]
         public ServicesInfo Get()
         {
-            return new ServicesInfo { id = 1, openDoorsDate = DateTime.Now, programsCount = 1, teachersCount = 2, graduatesCount = 3 };
-
+            return db.ServicesInfo.OrderBy(item => item.id).Last();
         }
     }
 }

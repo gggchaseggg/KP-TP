@@ -5,6 +5,8 @@
   "proxy": "https://localhost:7084",
   "type": "module",
   "dependencies": {
+    "@tanstack/react-query": "^4.18.0",
+    "@tanstack/react-query-devtools": "^4.18.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -12,6 +14,7 @@
     "@types/node": "^16.18.3",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
+    "axios": "^1.2.0",
     "clsx": "^1.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

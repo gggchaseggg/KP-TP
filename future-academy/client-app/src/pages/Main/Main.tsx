@@ -4,22 +4,16 @@ import clsx from "clsx";
 import { MONTHS } from "../../data/month";
 import { Link } from "react-router-dom";
 import PATHS from "../../data/paths";
+import { useServicesInfo } from "../../queries/ServicesInfo/servicesInfoQueries";
 
 const Main = () => {
-  const openDoorDate = new Date(2022, 10, 25);
-  const programsCount = 101;
-  const teachersCount = 82;
-  const graduatesCount = 14795;
   //TODO:GET даты дня открытых дверей
   //TODO:GET цифр количества крутости
 
-    const func = () => {
-        fetch("weatherforecast").then(response => response.json()).then(data => console.log(data))
-    }
+    const {data: servicesInfo } = useServicesInfo();
 
-  return (
+  return(
       <div>
-          <button onClick={func }>fgdsfdfsd</button>
       <img
         src="/img/Main/mainHeader.png"
         alt="картинка"
@@ -28,19 +22,20 @@ const Main = () => {
       />
       <div className={style.info}>
         <p>Актуальные знания от признанных практикующих специалистов</p>
-        <div className={style.numbers}>
-          <span>{programsCount}</span>
-          <span>{teachersCount}</span>
-          <span>{graduatesCount}</span>
-        </div>
+              {servicesInfo && <div className={style.numbers}>
+                  <span>{servicesInfo?.programsCount}</span>
+                  <span>{servicesInfo?.teachersCount}</span>
+                  <span>{servicesInfo?.graduatesCount}</span>
+              </div>}
+              
       </div>
       <div className={style.links}>
         <Link to={PATHS.OPEN_DOORS}>
           <div className={clsx(style.openDoors, "orangeCard")}>
             <div className={style.openDoors__date}>
-              <p className={style.openDoors__day}>{openDoorDate.getDate()}</p>
+                          <p className={style.openDoors__day}>{servicesInfo?.openDoorsDate.getDate()}</p>
               <p className={style.openDoors__month}>
-                {MONTHS[openDoorDate.getMonth()]}
+                              {servicesInfo && MONTHS[servicesInfo.openDoorsDate.getMonth()]}
               </p>
             </div>
             <div className={style.openDoors__text}>
