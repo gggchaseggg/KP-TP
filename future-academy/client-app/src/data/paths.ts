@@ -7,6 +7,8 @@ enum PATHS {
   PROGRAMS = "/programs",
   EVENTS = "/events",
   CAREER = "/career",
+  LOGIN = "/login",
+  COURSES = "/courses",
 }
 
 export default PATHS;

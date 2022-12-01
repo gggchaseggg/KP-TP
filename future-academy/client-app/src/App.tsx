@@ -1,20 +1,44 @@
 import React from "react";
 import Layout from "./component/Layout/Layout";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Main from "./pages/Main/Main";
 import PATHS from "./data/paths";
 import NotFound from "./pages/NotFound/NotFound";
 import ScrollToTop from "./util/ScrollToTop";
+import Courses from "./pages/Courses/Courses";
+import Login from "./pages/Login/Login";
+import {dropUser, setUser} from "./redux/userSlice";
+import {useAppDispatch} from "./redux/hooks";
+import axios from "axios";
 
 function App() {
+
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    const login = localStorage.getItem("login")
+    if (login != null) axios.get("/api/user/roleByLogin?login=" + login)
+      .then(response => {
+        if (response.data === "err") {
+          dispatch(dropUser());
+          localStorage.removeItem("login");
+        } else {
+          document.cookie = "role=" + response.data;
+          dispatch(setUser({login: login, role: response.data}))
+        }
+      })
+  }, [])
+
   return (
     <>
       <Router>
-        <ScrollToTop />
+        <ScrollToTop/>
         <Routes>
-          <Route path={PATHS.MAIN} element={<Layout />}>
-            <Route index element={<Main />} />
-            <Route path="*" element={<NotFound />} />
+          <Route path={PATHS.MAIN} element={<Layout/>}>
+            <Route index element={<Main/>}/>
+            <Route path={PATHS.COURSES} element={<Courses/>}/>
+            <Route path={PATHS.LOGIN} element={<Login/>}/>
+            <Route path="*" element={<NotFound/>}/>
           </Route>
         </Routes>
       </Router>

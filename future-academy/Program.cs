@@ -1,4 +1,7 @@
 
+using future_academy.Contexts;
+using Microsoft.EntityFrameworkCore;
+
 namespace future_academy
 {
     public class Program
@@ -10,6 +13,8 @@ namespace future_academy
             // Add services to the container.
 
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<UniversityContext>(opt => opt.UseMySql(builder.Configuration.GetConnectionString("defaultConnection"), new MySqlServerVersion(new Version(8, 0, 31))));
 
             var app = builder.Build();
 

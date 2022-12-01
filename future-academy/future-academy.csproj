@@ -33,11 +33,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="client-app\src\component\Layout\Header\UserLabel\UserLabel.tsx" />
+    <None Remove="client-app\src\queries\Account\accountsTypes.ts" />
     <None Remove="client-app\src\queries\ServicesInfo\servicesInfoQueries.ts" />
     <None Remove="client-app\src\queries\ServicesInfo\servicesInfoTypes.ts" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="client-app\src\component\Layout\Header\UserLabel\UserLabel.tsx" />
+    <TypeScriptCompile Include="client-app\src\queries\Account\accountsTypes.ts" />
     <TypeScriptCompile Include="client-app\src\queries\ServicesInfo\servicesInfoQueries.ts" />
     <TypeScriptCompile Include="client-app\src\queries\ServicesInfo\servicesInfoTypes.ts" />
   </ItemGroup>

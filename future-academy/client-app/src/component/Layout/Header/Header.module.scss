@@ -29,11 +29,7 @@ li.navItem {
   }
 }
 
-.icon {
-  padding-top: 4px;
-  margin-right: 6px;
-  color: #00093c;
-}
+
 
 span.city {
   border-bottom: 2px solid black;
@@ -44,10 +40,14 @@ span.city {
   margin-left: 10px;
 }
 
-a.tel {
+li.navItem>a {
   padding-top: 2px;
   border-bottom: 2px solid transparent;
   &:hover {
     border-bottom: 2px solid black;
+  }
+  &:has(img):hover {
+    border: none;
+    opacity: 0.9;
   }
 }

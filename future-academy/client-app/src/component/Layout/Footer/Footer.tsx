@@ -21,7 +21,7 @@ const Footer = () => {
         <div className={style.abit}>
           <h4>Абитуриентам</h4>
           <ul>
-            {abiturient.map((item,idx) => (
+            {abiturient.map((item, idx) => (
               <li key={idx} className={style.rentItem}>
                 <Link to={item.url}>{item.text}</Link>
               </li>
@@ -31,7 +31,7 @@ const Footer = () => {
         <div className={style.stud}>
           <h4>Студентам</h4>
           <ul>
-            {student.map((item,idx) => (
+            {student.map((item, idx) => (
               <li key={idx} className={style.rentItem}>
                 <Link to={item.url}>{item.text}</Link>
               </li>
@@ -40,16 +40,16 @@ const Footer = () => {
         <div className={style.aspir}>
           <h4>Аспирантам</h4>
           <ul>
-            {aspirant.map((item,idx) => (
+            {aspirant.map((item, idx) => (
               <li key={idx} className={style.rentItem}>
                 <Link to={item.url}>{item.text}</Link>
               </li>
             ))}</ul>
         </div>
-        <div  className={style.univer}>
+        <div className={style.univer}>
           <h4>Информация</h4>
           <ul>
-            {info.map((item,idx) => (
+            {info.map((item, idx) => (
               <li key={idx} className={style.rentItem}>
                 <Link to={item.url}>{item.text}</Link>
               </li>

@@ -1,12 +1,9 @@
 import React from "react";
 import style from "./Header.module.scss";
 import MenuIcon from "../../SvgIcons/MenuIcon";
-import CityIcon from "../../SvgIcons/CityIcon";
-import SignIcon from "../../SvgIcons/SignIcon";
-import clsx from "clsx";
-import ProfileIcon from "../../SvgIcons/ProfileIcon";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import PATHS from "../../../data/paths";
+import UserLabel from "./UserLabel/UserLabel";
 
 const Header = () => {
   return (
@@ -15,12 +12,12 @@ const Header = () => {
         <ul className={style.navList}>
           <li className={style.navItem}>
             <Link to={PATHS.MAIN}>
-              <img src="/img/Layout/logo.png" alt="лого" />
+              <img src="/img/Layout/logo.png" alt="лого"/>
             </Link>
           </li>
           <li className={style.navItem}>
             <Link to={PATHS.PROGRAMS}>
-              <MenuIcon className={style.icon} />
+              <MenuIcon className={style.icon}/>
               <span>Все специальности</span>
             </Link>
           </li>
@@ -39,8 +36,7 @@ const Header = () => {
             </a>
           </li>
           <li className={style.navItem}>
-            <ProfileIcon className={style.icon} />
-            <span>Войти</span>
+            <UserLabel/>
           </li>
         </ul>
       </nav>
