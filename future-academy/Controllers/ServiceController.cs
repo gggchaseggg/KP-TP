@@ -29,9 +29,9 @@ namespace future_academy.Controllers
         [HttpPost("appeal")]
         public async Task<Appeal> postAppeal(FooterAppealModel model)
         {
-            var cookie = HttpContext.Request.Cookies["login"];
-
-            Console.WriteLine(cookie);
+            //var cookie = HttpContext.Request.Cookies["login"];
+            //HttpContext.Response.Cookies.Append("role", "user");
+            //Console.WriteLine(cookie);
 
             Appeal appeal = new Appeal(
                 model.name,

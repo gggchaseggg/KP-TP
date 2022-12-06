@@ -67,5 +67,7 @@ namespace future_academy.Controllers
             await _context.SaveChangesAsync();
             return account;
         }
+
+
     }
 }

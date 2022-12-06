@@ -10,6 +10,7 @@ import Login from "./pages/Login/Login";
 import {dropUser, setUser} from "./redux/userSlice";
 import {useAppDispatch} from "./redux/hooks";
 import axios from "axios";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
 
@@ -21,9 +22,7 @@ function App() {
       .then(response => {
         if (response.data === "err") {
           dispatch(dropUser());
-          localStorage.removeItem("login");
         } else {
-          document.cookie = "role=" + response.data;
           dispatch(setUser({login: login, role: response.data}))
         }
       })
@@ -38,6 +37,7 @@ function App() {
             <Route index element={<Main/>}/>
             <Route path={PATHS.COURSES} element={<Courses/>}/>
             <Route path={PATHS.LOGIN} element={<Login/>}/>
+            <Route path={PATHS.PROFILE+"/:login"} element={<Profile/>}/>
             <Route path="*" element={<NotFound/>}/>
           </Route>
         </Routes>

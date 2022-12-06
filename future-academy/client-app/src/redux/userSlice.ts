@@ -1,14 +1,15 @@
 ﻿import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 type userTypes = {
-  login: string;
-  role: string;
+  login: string | undefined;
+  role: string | undefined;
 };
 
 const initialState: userTypes = {
-  login: "",
-  role: "",
+  login: undefined,
+  role: undefined,
 };
+
 
 const userSlice = createSlice({
   name: "user",
@@ -19,11 +20,14 @@ const userSlice = createSlice({
       action: PayloadAction<userTypes>
     ) {
       Object.assign(state, action.payload);
+      document.cookie = `role=${action.payload.role};`;
     },
     dropUser(
       state
     ) {
       Object.assign(state, initialState);
+      document.cookie = "";
+      localStorage.removeItem("login");
     }
   },
 });

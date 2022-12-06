@@ -9,6 +9,8 @@ enum PATHS {
   CAREER = "/career",
   LOGIN = "/login",
   COURSES = "/courses",
+  PROFILE = "/user",
+  SCORE_INFO = "score-info",
 }
 
 export default PATHS;

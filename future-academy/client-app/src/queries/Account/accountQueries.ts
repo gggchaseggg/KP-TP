@@ -3,11 +3,11 @@ import axios from "axios";
 import { AccountTypes } from "./accountsTypes";
 
 
-const getUsers = (): Promise<AccountTypes> =>
+const getAccounts = (): Promise<AccountTypes> =>
     axios
         .get(`api/user`)
         .then(({ data }) => data);
 
-export const useUsers = (): UseQueryResult<AccountTypes> => {
-    return useQuery<AccountTypes>(["users"], getUsers)
+export const useAccounts = (): UseQueryResult<AccountTypes> => {
+    return useQuery<AccountTypes>(["users"], getAccounts)
 }

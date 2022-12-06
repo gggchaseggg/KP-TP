@@ -40,6 +40,7 @@ const Login = () => {
     if (accountRole === "err") dispatch(dropUser())
     else {
       localStorage.setItem("login", data.logLogin);
+      document.cookie = `role=${accountRole};`
       dispatch(setUser({login: data.logLogin, role: accountRole}));
       loginReset();
       navigate("/");

@@ -11,8 +11,8 @@ using future_academy.Contexts;
 namespace future_academy.Migrations
 {
     [DbContext(typeof(UniversityContext))]
-    [Migration("20221130140051_add-appeal")]
-    partial class addappeal
+    [Migration("20221202135423_migr")]
+    partial class migr
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -74,6 +74,21 @@ namespace future_academy.Migrations
                     b.ToTable("Appeals");
                 });
 
+            modelBuilder.Entity("future_academy.Models.Group", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Groups");
+                });
+
             modelBuilder.Entity("future_academy.Models.ServicesInfo", b =>
                 {
                     b.Property<int>("id")
@@ -95,6 +110,62 @@ namespace future_academy.Migrations
                     b.HasKey("id");
 
                     b.ToTable("ServicesInfo");
+                });
+
+            modelBuilder.Entity("future_academy.Models.Student", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("accountId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("department")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("groupId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("patronomic")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("surname")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("accountId");
+
+                    b.HasIndex("groupId");
+
+                    b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("future_academy.Models.Student", b =>
+                {
+                    b.HasOne("future_academy.Models.Account", "account")
+                        .WithMany()
+                        .HasForeignKey("accountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("future_academy.Models.Group", "group")
+                        .WithMany()
+                        .HasForeignKey("groupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("account");
+
+                    b.Navigation("group");
                 });
 #pragma warning restore 612, 618
         }

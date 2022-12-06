@@ -21,9 +21,9 @@ const Main = () => {
       <div className={style.info}>
         <p>Актуальные знания от признанных практикующих специалистов</p>
         {servicesInfo && <div className={style.numbers}>
-            <span>{servicesInfo?.programsCount}</span>
-            <span>{servicesInfo?.teachersCount}</span>
-            <span>{servicesInfo?.graduatesCount}</span>
+            <span>{servicesInfo.programsCount}</span>
+            <span>{servicesInfo.teachersCount}</span>
+            <span>{servicesInfo.graduatesCount}</span>
         </div>}
 
       </div>
