@@ -5,7 +5,7 @@ import { AccountTypes } from "./accountsTypes";
 
 const getAccounts = (): Promise<AccountTypes> =>
     axios
-        .get(`api/user`)
+        .get(`api/account`)
         .then(({ data }) => data);
 
 export const useAccounts = (): UseQueryResult<AccountTypes> => {

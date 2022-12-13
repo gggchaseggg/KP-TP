@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using future_academy.Contexts;
 
@@ -10,9 +11,10 @@ using future_academy.Contexts;
 namespace future_academy.Migrations
 {
     [DbContext(typeof(UniversityContext))]
-    partial class UniversityContextModelSnapshot : ModelSnapshot
+    [Migration("20221212094239_add-ragDate")]
+    partial class addragDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,15 +35,7 @@ namespace future_academy.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("password")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("patronomic")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -49,10 +43,6 @@ namespace future_academy.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("role")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("surname")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("id");
@@ -130,14 +120,27 @@ namespace future_academy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("accountId")
+                    b.Property<int>("accountId")
                         .HasColumnType("int");
 
                     b.Property<string>("department")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("groupId")
+                    b.Property<int>("groupId")
                         .HasColumnType("int");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("patronomic")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("surname")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("id");
 
@@ -152,11 +155,15 @@ namespace future_academy.Migrations
                 {
                     b.HasOne("future_academy.Models.Account", "account")
                         .WithMany()
-                        .HasForeignKey("accountId");
+                        .HasForeignKey("accountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("future_academy.Models.Group", "group")
                         .WithMany()
-                        .HasForeignKey("groupId");
+                        .HasForeignKey("groupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("account");
 

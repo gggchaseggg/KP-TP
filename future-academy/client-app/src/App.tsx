@@ -18,7 +18,7 @@ function App() {
 
   React.useEffect(() => {
     const login = localStorage.getItem("login")
-    if (login != null) axios.get("/api/user/roleByLogin?login=" + login)
+    if (login != null) axios.get("/api/account/roleByLogin?login=" + login)
       .then(response => {
         if (response.data === "err") {
           dispatch(dropUser());

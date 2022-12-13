@@ -6,14 +6,21 @@
         public string login { get; set; }
         public string password { get; set; }
         public string email { get; set; }
-        public string role  { get; set; }
+        public string? role  { get; set; }
+        public DateTime registerDate { get; set; }
+        public string name { get; set; }
+        public string surname { get; set; }
+        public string patronomic { get; set; }
 
-        public Account(string login, string password, string email, string role = "user")
+        public Account(string login, string password, string email, string name, string surname, string patronomic)
         {
             this.login = login;
             this.password = password;
             this.email = email;
-            this.role = role;
+            this.registerDate = DateTime.Now;
+            this.name = name;
+            this.surname = surname;
+            this.patronomic = patronomic;
         }
     }
 }

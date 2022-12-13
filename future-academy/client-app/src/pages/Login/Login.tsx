@@ -12,6 +12,9 @@ type FormRegisterValueType = {
   regLogin: string;
   regEmail: string;
   regPassword: string;
+  regName: string;
+  regSurname: string;
+  regPatronomic: string;
 }
 
 type FormLoginValueType = {
@@ -33,7 +36,7 @@ const Login = () => {
   } = useForm<FormLoginValueType>();
 
   const onLoginSubmit: SubmitHandler<FormLoginValueType> = async (data) => {
-    const accountRole = await axios.post("/api/user/login", {
+    const accountRole = await axios.post("/api/account/login", {
       logLogin: data.logLogin,
       logPassword: crypto.SHA1(data.logPassword).toString()
     }).then(({data}) => data);
@@ -56,16 +59,19 @@ const Login = () => {
 
   const onRegisterSubmit: SubmitHandler<FormRegisterValueType> = async (data) => {
 
-    const usersWithLogin = await axios.get("api/user/existslogin", {params: {login: data.regLogin}}).then(({data}) => data)
-    const usersWithEmail = await axios.get("api/user/existsemail", {params: {email: data.regEmail}}).then(({data}) => data)
+    const usersWithLogin = await axios.get("api/account/existslogin", {params: {login: data.regLogin}}).then(({data}) => data)
+    const usersWithEmail = await axios.get("api/account/existsemail", {params: {email: data.regEmail}}).then(({data}) => data)
 
     if (!usersWithEmail || !usersWithLogin) {
       registerSetError("regLogin", {type: "custom", message: "userLogin is using"})
     } else {
-      await axios.post("/api/user/register", {
+      await axios.post("/api/account/register", {
         regLogin: data.regLogin,
         regEmail: data.regEmail,
         regPassword: crypto.SHA1(data.regPassword).toString(),
+        regName: data.regName,
+        regSurname: data.regSurname,
+        regPatronomic: data.regPatronomic,
       });
       registerReset();
       navigate("/");
@@ -123,6 +129,21 @@ const Login = () => {
                  className={style.input}
                  {...registerRegister("regPassword", {required: true})}
                  placeholder={"Пароль"}
+                 autoComplete={"off"}/>
+          <input type="text"
+                 className={style.input}
+                 {...registerRegister("regName", {required: true})}
+                 placeholder={"Имя"}
+                 autoComplete={"off"}/>
+          <input type="text"
+                 className={style.input}
+                 {...registerRegister("regSurname", {required: true})}
+                 placeholder={"Фамилия"}
+                 autoComplete={"off"}/>
+          <input type="text"
+                 className={style.input}
+                 {...registerRegister("regPatronomic", {required: true})}
+                 placeholder={"Отчество"}
                  autoComplete={"off"}/>
           <button type="submit" className={style.submit}>Зарегистрироваться</button>
         </form>

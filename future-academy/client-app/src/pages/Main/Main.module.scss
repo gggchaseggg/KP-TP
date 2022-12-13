@@ -18,7 +18,10 @@
 
 .numbers {
   padding-bottom: 30px;
+  display: flex;
+  justify-content: start;
   & span {
+    display: block;
     background: linear-gradient(
       90deg,
       rgba(247, 148, 29, 0.7) 0%,
@@ -31,8 +34,8 @@
     font-size: 86px;
     line-height: 105px;
     letter-spacing: 0.095em;
-    margin-right: 120px;
     position: relative;
+    min-width: 270px;
     &::after {
       position: absolute;
       top: 90px;

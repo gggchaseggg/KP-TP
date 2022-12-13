@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace future_academy.Controllers
 {
     [ApiController]
-    [Route("api/user")]
+    [Route("api/account")]
     public class AccountController : ControllerBase
     {
 
@@ -60,7 +60,10 @@ namespace future_academy.Controllers
             Account account = new Account (
                 model.regLogin,
                 model.regPassword,
-                model.regEmail
+                model.regEmail,
+                model.regName,
+                model.regSurname,
+                model.regPatronomic
             );
 
             _context.Accounts.Add(account);
