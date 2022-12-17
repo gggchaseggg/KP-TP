@@ -10,6 +10,8 @@ import {useStudentByLogin} from "../../../queries/User/userQueries";
 import {SubmitHandler, useForm} from "react-hook-form";
 import axios from "axios";
 import crypto from "crypto-js";
+import {randomCardColor} from "../../../util/randomCardColor";
+import {useCoursesInProfile} from "../../../queries/Courses/coursesQueries";
 
 
 type UserProfileTypes = {
@@ -32,6 +34,7 @@ const UserProfile: React.FC<UserProfileTypes> = ({user}) => {
   const {login} = useParams();
   const isShowByLogin = login === user.login;
   const {data: userFromDB} = useStudentByLogin(login as string);
+  const {data: coursesList} = useCoursesInProfile();
 
   const {
     register: updateRegister,
@@ -44,6 +47,7 @@ const UserProfile: React.FC<UserProfileTypes> = ({user}) => {
     if (data.newPassword !== "") data.newPassword = crypto.SHA1(data.newPassword).toString()
     await axios.post("/api/user/updateinfo", {login: user.login, ...data}).then(({data}) => console.log(data));
   }
+
 
   return (
     <>
@@ -119,9 +123,15 @@ const UserProfile: React.FC<UserProfileTypes> = ({user}) => {
           </div>
           {isShowByLogin && <>
               <div id={style.courseTab}>
-                  <div className={clsx("orangeCard", style.courseCard)}>
-                      <h3>Название курса</h3>
-                  </div>
+                {
+                  coursesList?.map((item, idx) =>
+                    <Link to={`${PATHS.COURSE}/${item.id}`} key={`course${item.id+item.title}`}>
+                      <div className={clsx(randomCardColor(), style.courseCard)}>
+                        <h3>{item.title}</h3>
+                        <p>Преподаватель: {item.teacher}</p>
+                      </div>
+                    </Link>)
+                }
               </div>
               <div id={style.settingsTab}>
                   <p className={style.tab__title}>Настройки</p>
@@ -171,6 +181,40 @@ const UserProfile: React.FC<UserProfileTypes> = ({user}) => {
                                   </td>
                               </tr>
                               <tr>
+                                  <td><label htmlFor="updateGroup">Группа</label></td>
+                                  <td>
+                                      <input type="text"
+                                             id="updateGroup"
+                                             className={style.input}
+                                             {...updateRegister("group")}
+                                             placeholder={"Группа"}
+                                             autoComplete={"off"}
+                                             defaultValue={userFromDB?.group !== "Не указано"
+                                               ? userFromDB?.group
+                                               : undefined}/>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td><label htmlFor="updateDepartament">Кафедра</label></td>
+                                  <td>
+                                      <input type="text"
+                                             id="updateDepartament"
+                                             className={style.input}
+                                             {...updateRegister("departament")}
+                                             placeholder={"Кафедра"}
+                                             autoComplete={"off"}
+                                             defaultValue={userFromDB?.departament !== "Не указано"
+                                               ? userFromDB?.departament
+                                               : undefined}/>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td colSpan={2}>
+                                      <hr/>
+                                      <h6>Информация об аккаунте</h6>
+                                  </td>
+                              </tr>
+                              <tr>
                                   <td><label htmlFor="updateEmail">Почта</label></td>
                                   <td>
                                       <input type="text"
@@ -194,34 +238,7 @@ const UserProfile: React.FC<UserProfileTypes> = ({user}) => {
                                       />
                                   </td>
                               </tr>
-                              <tr>
-                                  <td><label htmlFor="updateGroup">Группа</label></td>
-                                  <td>
-                                      <input type="text"
-                                             id="updateGroup"
-                                             className={style.input}
-                                             {...updateRegister("group")}
-                                             placeholder={"Почта"}
-                                             autoComplete={"off"}
-                                             defaultValue={userFromDB?.group !== "Не указано"
-                                               ? userFromDB?.group
-                                               : undefined}/>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td><label htmlFor="updateDepartament">Кафедра</label></td>
-                                  <td>
-                                      <input type="text"
-                                             id="updateDepartament"
-                                             className={style.input}
-                                             {...updateRegister("departament")}
-                                             placeholder={"Кафедра"}
-                                             autoComplete={"off"}
-                                             defaultValue={userFromDB?.departament !== "Не указано"
-                                               ? userFromDB?.departament
-                                               : undefined}/>
-                                  </td>
-                              </tr>
+
                               </tbody>
                           </table>
                           <button type="submit" className={style.submit}>Сохранить</button>

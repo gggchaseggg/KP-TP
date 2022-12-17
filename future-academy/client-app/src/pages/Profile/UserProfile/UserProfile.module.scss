@@ -224,11 +224,24 @@ button.exitButton {
   position: relative;
   padding-top: 15px;
   padding-left: 20px;
+  cursor: pointer;
+  margin-bottom: 30px;
 
   h3 {
+    width: 90%;
     font-weight: 500;
-    font-size: 32px;
+    font-size: 24px;
     line-height: 26px;
     color: #000000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  p {
+    margin-top: 5px;
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.5);
   }
 }

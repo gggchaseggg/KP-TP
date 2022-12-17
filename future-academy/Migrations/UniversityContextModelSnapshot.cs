@@ -60,6 +60,29 @@ namespace future_academy.Migrations
                     b.ToTable("Accounts");
                 });
 
+            modelBuilder.Entity("future_academy.Models.Answer", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Questionid")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isCorrect")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("text")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Questionid");
+
+                    b.ToTable("Answers");
+                });
+
             modelBuilder.Entity("future_academy.Models.Appeal", b =>
                 {
                     b.Property<int>("id")
@@ -86,6 +109,25 @@ namespace future_academy.Migrations
                     b.ToTable("Appeals");
                 });
 
+            modelBuilder.Entity("future_academy.Models.Course", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("teacher")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Courses");
+                });
+
             modelBuilder.Entity("future_academy.Models.Group", b =>
                 {
                     b.Property<int>("id")
@@ -99,6 +141,26 @@ namespace future_academy.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Groups");
+                });
+
+            modelBuilder.Entity("future_academy.Models.Question", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Testid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("question")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Testid");
+
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("future_academy.Models.ServicesInfo", b =>
@@ -148,6 +210,40 @@ namespace future_academy.Migrations
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("future_academy.Models.Test", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Courseid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("theme")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Courseid");
+
+                    b.ToTable("Tests");
+                });
+
+            modelBuilder.Entity("future_academy.Models.Answer", b =>
+                {
+                    b.HasOne("future_academy.Models.Question", null)
+                        .WithMany("answers")
+                        .HasForeignKey("Questionid");
+                });
+
+            modelBuilder.Entity("future_academy.Models.Question", b =>
+                {
+                    b.HasOne("future_academy.Models.Test", null)
+                        .WithMany("questions")
+                        .HasForeignKey("Testid");
+                });
+
             modelBuilder.Entity("future_academy.Models.Student", b =>
                 {
                     b.HasOne("future_academy.Models.Account", "account")
@@ -161,6 +257,28 @@ namespace future_academy.Migrations
                     b.Navigation("account");
 
                     b.Navigation("group");
+                });
+
+            modelBuilder.Entity("future_academy.Models.Test", b =>
+                {
+                    b.HasOne("future_academy.Models.Course", null)
+                        .WithMany("tests")
+                        .HasForeignKey("Courseid");
+                });
+
+            modelBuilder.Entity("future_academy.Models.Course", b =>
+                {
+                    b.Navigation("tests");
+                });
+
+            modelBuilder.Entity("future_academy.Models.Question", b =>
+                {
+                    b.Navigation("answers");
+                });
+
+            modelBuilder.Entity("future_academy.Models.Test", b =>
+                {
+                    b.Navigation("questions");
                 });
 #pragma warning restore 612, 618
         }

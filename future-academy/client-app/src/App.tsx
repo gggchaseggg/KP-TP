@@ -5,12 +5,13 @@ import Main from "./pages/Main/Main";
 import PATHS from "./data/paths";
 import NotFound from "./pages/NotFound/NotFound";
 import ScrollToTop from "./util/ScrollToTop";
-import Courses from "./pages/Courses/Courses";
 import Login from "./pages/Login/Login";
 import {dropUser, setUser} from "./redux/userSlice";
 import {useAppDispatch} from "./redux/hooks";
 import axios from "axios";
 import Profile from "./pages/Profile/Profile";
+import Course from "./pages/Course/Course";
+import Test from "./pages/Test/Test";
 
 function App() {
 
@@ -35,9 +36,10 @@ function App() {
         <Routes>
           <Route path={PATHS.MAIN} element={<Layout/>}>
             <Route index element={<Main/>}/>
-            <Route path={PATHS.COURSES} element={<Courses/>}/>
             <Route path={PATHS.LOGIN} element={<Login/>}/>
             <Route path={PATHS.PROFILE+"/:login"} element={<Profile/>}/>
+            <Route path={PATHS.COURSE+"/:id"} element={<Course/>}/>
+            <Route path={PATHS.TESTS+"/:testid"} element={<Test/>}/>
             <Route path="*" element={<NotFound/>}/>
           </Route>
         </Routes>
