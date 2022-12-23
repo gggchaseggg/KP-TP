@@ -1,22 +1,24 @@
 import React from 'react';
 import style from "./Test.module.scss"
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useTestById} from "../../queries/Courses/coursesQueries";
-import serialize from "form-serialize";
 import axios from "axios";
 import serializer from "../../util/form-serialize"
+import {useAppSelector} from "../../redux/hooks";
 
 const Test = () => {
   const {testid} = useParams();
   const {data: test} = useTestById(testid as string);
+  const user = useAppSelector(state => state.user);
+  const navigate = useNavigate();
 
   function onsubmit(e: any) {
     e.preventDefault();
-    const result = {testid:[testid], ...serializer(e.target)}
-    console.log(result);
+    const result = {testId:[testid], userLogin:[user.login], ...serializer(e.target)}
     axios
       .post("/api/courses/test", result)
-      .then(r => console.log(r.data))
+      .then(r => r.data)
+    navigate("/")
   }
 
   return (

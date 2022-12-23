@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using future_academy.Contexts;
 
@@ -10,9 +11,10 @@ using future_academy.Contexts;
 namespace future_academy.Migrations
 {
     [DbContext(typeof(UniversityContext))]
-    partial class UniversityContextModelSnapshot : ModelSnapshot
+    [Migration("20221222120428_change-passedStudentList")]
+    partial class changepassedStudentList
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -195,9 +197,6 @@ namespace future_academy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("Testid")
-                        .HasColumnType("int");
-
                     b.Property<int?>("accountId")
                         .HasColumnType("int");
 
@@ -208,8 +207,6 @@ namespace future_academy.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("id");
-
-                    b.HasIndex("Testid");
 
                     b.HasIndex("accountId");
 
@@ -260,10 +257,6 @@ namespace future_academy.Migrations
 
             modelBuilder.Entity("future_academy.Models.Student", b =>
                 {
-                    b.HasOne("future_academy.Models.Test", null)
-                        .WithMany("passedStudents")
-                        .HasForeignKey("Testid");
-
                     b.HasOne("future_academy.Models.Account", "account")
                         .WithMany()
                         .HasForeignKey("accountId");
@@ -296,8 +289,6 @@ namespace future_academy.Migrations
 
             modelBuilder.Entity("future_academy.Models.Test", b =>
                 {
-                    b.Navigation("passedStudents");
-
                     b.Navigation("questions");
                 });
 #pragma warning restore 612, 618

@@ -10,10 +10,22 @@ export type QuestionTypes = {
   answers: AnswerTypes[];
 }
 
+export type StudentTypes = {
+  id: number;
+  groupId: number;
+  group: null;
+  department: string;
+  accountId: number;
+  account: null;
+}
+
 export type TestTypes = {
   id: number;
   theme: string;
   questions: QuestionTypes[];
+  endDate: Date;
+  passedStudents: StudentTypes[];
+  isAvailable: boolean;
 }
 
 export type CoursesTypes = {

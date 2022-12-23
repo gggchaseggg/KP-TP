@@ -7,6 +7,7 @@ export type StudentTypes = {
   group: string;
   departament: string;
   role: string;
+  score: number;
 }
 
 export type UserTypes = {

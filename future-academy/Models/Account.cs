@@ -11,6 +11,7 @@
         public string name { get; set; }
         public string surname { get; set; }
         public string patronomic { get; set; }
+        public int score { get; set; }
 
         public Account(string login, string password, string email, string name, string surname, string patronomic)
         {

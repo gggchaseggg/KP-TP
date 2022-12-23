@@ -11,7 +11,10 @@ enum PATHS {
   COURSE = "/course",
   TESTS = "/test",
   PROFILE = "/user",
-  SCORE_INFO = "score-info",
+  SCORE_INFO = "/score-info",
 }
 
 export default PATHS;
+
+
+

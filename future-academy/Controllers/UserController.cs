@@ -38,7 +38,8 @@ namespace future_academy.Controllers
                     student.account.email,
                     student.group.title,
                     student.department,
-                    student.account.role);
+                    student.account.role,
+                    student.account.score);
             } catch
             {
                 var user = _context.Accounts
@@ -53,7 +54,8 @@ namespace future_academy.Controllers
                     user.email,
                     "Не указано",
                     "Не указано",
-                    !(user.role is null) ? user.role : "Не указано");
+                    !(user.role is null) ? user.role : "Не указано",
+                    user.score);
             }
             
         }

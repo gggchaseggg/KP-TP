@@ -17,3 +17,5 @@ export const useServicesInfo = (): UseQueryResult<ServicesInfoTypes> => {
         staleTime: Infinity,
     })
 }
+
+

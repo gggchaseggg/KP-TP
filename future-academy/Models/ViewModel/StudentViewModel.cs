@@ -10,6 +10,7 @@
         public string group { get; set; }
         public string departament { get; set; }
         public string role { get; set; }
+        public int score { get; set; }
 
         public StudentViewModel(
             string name, 
@@ -19,7 +20,8 @@
             string email, 
             string group, 
             string departament,
-            string role
+            string role,
+            int score
             ) {
             this.name = name;
             this.surname = surname;
@@ -29,6 +31,7 @@
             this.group = group;
             this.departament = departament;
             this.role = role;
+            this.score = score;
         }
     }
 }

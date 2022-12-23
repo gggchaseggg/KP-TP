@@ -21,6 +21,7 @@ const userSlice = createSlice({
     ) {
       Object.assign(state, action.payload);
       document.cookie = `role=${action.payload.role};`;
+      document.cookie = `login=${action.payload.login};`;
     },
     dropUser(
       state

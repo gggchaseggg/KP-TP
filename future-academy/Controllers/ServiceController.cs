@@ -23,16 +23,12 @@ namespace future_academy.Controllers
         [HttpGet("servicesinfo")]
         public ServicesInfo GetServicesInfo()
         {
-            return _context.ServicesInfo.OrderBy(item => item.id).Last();
+            return _context.ServicesInfo.OrderBy(item => item.openDoorsDate).Last();
         }
 
         [HttpPost("appeal")]
         public async Task<Appeal> postAppeal(FooterAppealModel model)
         {
-            //var cookie = HttpContext.Request.Cookies["login"];
-            //HttpContext.Response.Cookies.Append("role", "user");
-            //Console.WriteLine(cookie);
-
             Appeal appeal = new Appeal(
                 model.name,
                 model.phoneNumber,

@@ -4,6 +4,7 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import {useAppSelector} from "../../redux/hooks";
 import {useCoursesById} from "../../queries/Courses/coursesQueries";
 import PATHS from "../../data/paths";
+import clsx from "clsx";
 
 const Course = () => {
   const {id} = useParams();
@@ -12,9 +13,8 @@ const Course = () => {
   const {data: course} = useCoursesById(id as string);
 
   React.useEffect(() => {
-    if (user.login === undefined || user.login === "") navigate("*")
+    if (user.login === undefined || user.login === "") navigate("/")
   }, [])
-
 
   return (
     <div className={style.wrapper}>
@@ -23,18 +23,17 @@ const Course = () => {
         <p className={style.title__teacher}>{course?.teacher}</p>
       </div>
       <div className={style.main}>
-        {course?.tests.map((item) =>
-          <ul>
-            <li>
+        <ul className={style.testList}>
+          {course?.tests.map((item) =>
+            <li className={clsx(style.testItem, "greenCard")}>
               <Link to={`${PATHS.TESTS}/${item.id}`} key={`test${item.id + item.theme}`}>
                 {item.theme}
               </Link>
             </li>
-          </ul>
-        )}
+          )}
+        </ul>
       </div>
     </div>
   );
 };
-
 export default Course;

@@ -14,7 +14,11 @@ namespace future_academy
 
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddDbContext<UniversityContext>(opt => opt.UseMySql(builder.Configuration.GetConnectionString("defaultConnection"), new MySqlServerVersion(new Version(8, 0, 31))));
+            builder.Services.AddDbContext<UniversityContext>(
+                opt => opt.UseMySql(
+                    builder.Configuration.GetConnectionString("defaultConnection"),
+                    new MySqlServerVersion(new Version(8, 0, 31)))
+                );
 
             var app = builder.Build();
 
