@@ -55,7 +55,7 @@ namespace future_academy.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<Account> register(RegisterModel model)
+        public Account register(RegisterModel model)
         {
             Account account = new Account (
                 model.regLogin,
@@ -67,7 +67,8 @@ namespace future_academy.Controllers
             );
 
             _context.Accounts.Add(account);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
+            
             return account;
         }
 

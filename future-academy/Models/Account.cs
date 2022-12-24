@@ -18,7 +18,7 @@
             this.login = login;
             this.password = password;
             this.email = email;
-            this.registerDate = DateTime.Now;
+            this.registerDate = DateTime.Now.ToUniversalTime();
             this.name = name;
             this.surname = surname;
             this.patronomic = patronomic;

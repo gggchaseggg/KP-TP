@@ -14,7 +14,7 @@
             this.name = name;
             this.phoneNumber = phoneNumber;
             this.email = email;
-            this.date = DateTime.Now;
+            this.date = DateTime.Now.ToUniversalTime();
         }
     }
 }

@@ -1,4 +1,3 @@
-
 using future_academy.Contexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,11 +13,16 @@ namespace future_academy
 
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddDbContext<UniversityContext>(
-                opt => opt.UseMySql(
-                    builder.Configuration.GetConnectionString("defaultConnection"),
-                    new MySqlServerVersion(new Version(8, 0, 31)))
-                );
+            //builder.Services.AddDbContext<UniversityContext>(
+            //    opt => opt.UseMySql(
+            //        builder.Configuration.GetConnectionString("defaultConnection"),
+            //        new MySqlServerVersion(new Version(8, 0, 31)))
+            //    );
+
+            builder.Services.AddDbContext<UniversityContext>(opt =>
+            {
+                opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
 
             var app = builder.Build();
 
